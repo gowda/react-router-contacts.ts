@@ -1,0 +1,9 @@
+node_modules
+
+dist
+
+.eslintrc.cjs
+vite.config.ts
+jest.config.cjs
+**/*.js
+**/*.jsx
