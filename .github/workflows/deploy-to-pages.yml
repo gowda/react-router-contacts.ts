@@ -1,0 +1,46 @@
+name: deploy-to-pages
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+        env:
+          REACT_BASE: /react-router-contacts.ts/
+          VITE_BUILD_DEMO: 'true'
+      - name: Setup dist
+        run: echo > dist/.nojekyll
+      - name: Remove all the source
+        run: |
+          rm -rf src
+          rm -f package.json package-lock.json
+          rm -f vite.config.ts
+          rm -f README.md
+          rm -f index.html
+          rm -rf .github
+          rm .gitignore .prettierrc
+          rm tsconfig.json tsconfig.node.json
+          rm .eslintrc.cjs .eslintignore
+      - name: Copy dist to root
+        run: |
+          cp -va dist/* .
+          rm -rf dist public
+      - name: Commit the changes
+        run: |
+          cd $GITHUB_WORKSPACE
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "${{ github.actor }}"
+          git fetch --unshallow origin
+          git add index.html assets vite.svg mockServiceWorker.js
+          git commit -a -m 'Update gh-pages on master changes'
+          git push -f origin ${{ github.ref }}:gh-pages

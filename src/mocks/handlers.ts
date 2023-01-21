@@ -62,14 +62,14 @@ const deleteContact = (id: string) =>
     .then((contacts) => setContacts(contacts));
 
 const handlers = [
-  rest.get('http://localhost:5173/contacts', (req, res, ctx) => {
+  rest.get(`${import.meta.env.BASE_URL}contacts`, (req, res, ctx) => {
     const q = req.url.searchParams.get('q') ?? undefined;
 
     return getContacts(q).then((contacts) =>
       res(ctx.delay(1000), ctx.status(200), ctx.json(contacts))
     );
   }),
-  rest.post('http://localhost:5173/contacts', (req, res, ctx) => {
+  rest.post(`${import.meta.env.BASE_URL}contacts`, (req, res, ctx) => {
     const id = Math.random().toString(36).substring(2, 9);
     const contact: Contact = { id, createdAt: Date.now(), favorite: false };
 
@@ -78,31 +78,40 @@ const handlers = [
       .then((contacts) => setContacts(contacts))
       .then(() => res(ctx.status(201), ctx.json(contact)));
   }),
-  rest.get('/contacts/:contactId', (req, res, ctx) => {
-    const { contactId } = req.params;
+  rest.get(
+    `${import.meta.env.BASE_URL}contacts/:contactId`,
+    (req, res, ctx) => {
+      const { contactId } = req.params;
 
-    return getContact(contactId as string).then((contact) =>
-      res(
-        ctx.delay(1000),
-        ctx.status(contact ? 200 : 404),
-        ctx.json(contact ?? null)
-      )
-    );
-  }),
-  rest.put('/contacts/:contactId', (req, res, ctx) => {
-    const { contactId } = req.params;
+      return getContact(contactId as string).then((contact) =>
+        res(
+          ctx.delay(1000),
+          ctx.status(contact ? 200 : 404),
+          ctx.json(contact ?? null)
+        )
+      );
+    }
+  ),
+  rest.put(
+    `${import.meta.env.BASE_URL}contacts/:contactId`,
+    (req, res, ctx) => {
+      const { contactId } = req.params;
 
-    return req
-      .json()
-      .then((attrs) => updateContact(contactId as string, attrs))
-      .then((contact) => res(ctx.status(200), ctx.json(contact)));
-  }),
-  rest.delete('/contacts/:contactId', (req, res, ctx) => {
-    const { contactId } = req.params;
-    return deleteContact(contactId as string).then(() =>
-      res(ctx.status(200), ctx.json(null))
-    );
-  }),
+      return req
+        .json()
+        .then((attrs) => updateContact(contactId as string, attrs))
+        .then((contact) => res(ctx.status(200), ctx.json(contact)));
+    }
+  ),
+  rest.delete(
+    `${import.meta.env.BASE_URL}contacts/:contactId`,
+    (req, res, ctx) => {
+      const { contactId } = req.params;
+      return deleteContact(contactId as string).then(() =>
+        res(ctx.status(200), ctx.json(null))
+      );
+    }
+  ),
 ];
 
 export default handlers;

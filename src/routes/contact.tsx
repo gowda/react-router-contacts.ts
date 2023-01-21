@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -7,21 +6,20 @@ import {
 
 import { Contact as IContact } from '../contact';
 import ContactComponent from '../components/contact';
+import client from '../client';
 
 export const loader = ({ params: { contactId } }: LoaderFunctionArgs) =>
-  axios.get<IContact>(`/contacts/${contactId}`).then(({ data }) => data);
+  client.get<IContact>(`/contacts/${contactId}`).then(({ data }) => data);
 
 export const action = ({
   params: { contactId },
   request,
 }: ActionFunctionArgs) =>
-  request
-    .formData()
-    .then((data) =>
-      axios.put<IContact>(`/contacts/${contactId}`, {
-        favorite: data.get('favorite') === 'true',
-      })
-    );
+  request.formData().then((data) =>
+    client.put<IContact>(`/contacts/${contactId}`, {
+      favorite: data.get('favorite') === 'true',
+    })
+  );
 
 const Contact = () => {
   const contact = useLoaderData() as IContact;

@@ -11,6 +11,7 @@ const ContactsNav = () => {
       </p>
     );
   }
+
   return (
     <nav>
       <ul>

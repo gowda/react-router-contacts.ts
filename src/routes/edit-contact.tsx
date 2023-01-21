@@ -1,8 +1,8 @@
 import { ActionFunctionArgs, redirect, useLoaderData } from 'react-router-dom';
-import axios from 'axios';
 
 import { Contact } from '../contact';
 import EditContactComponent from '../components/edit-contact';
+import client from '../client';
 
 export const action = ({
   request,
@@ -11,7 +11,7 @@ export const action = ({
   request
     .formData()
     .then((data) => Object.fromEntries(data))
-    .then((attrs) => axios.put<Contact>(`/contacts/${contactId}`, attrs))
+    .then((attrs) => client.put<Contact>(`contacts/${contactId}`, attrs))
     .then(() => redirect(`/contacts/${contactId}`));
 
 const EditContact = () => {

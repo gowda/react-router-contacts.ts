@@ -8,6 +8,5 @@ export interface LoaderData {
 
 export const useContacts = () => {
   const { contacts } = useLoaderData() as LoaderData;
-
   return contacts;
 };

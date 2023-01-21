@@ -5,9 +5,16 @@ import './index.css';
 import { createRouter } from './router';
 
 const setupMocks = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.VITE_ENABLE_MSW === 'true') {
     // eslint-disable-next-line global-require
-    return import('./mocks/browser').then(({ worker }) => worker.start());
+    return import('./mocks/browser').then(({ worker }) =>
+      worker.start({
+        serviceWorker: {
+          url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+        },
+        onUnhandledRequest: 'bypass',
+      })
+    );
   }
 
   return Promise.resolve(true);
