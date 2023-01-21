@@ -15,7 +15,7 @@ const LabelledTextFieldArray = ({ label, fields }: Props) => (
       <span>{label}</span>
     </Grid>
     <Grid item xs={12} md={10}>
-      <Grid container columnSpacing={2}>
+      <Grid container columnSpacing={2} rowSpacing={2}>
         {fields.map(({ name, placeholder, defaultValue }) => (
           <Grid key={name} item xs={12} md={6}>
             <TextField
