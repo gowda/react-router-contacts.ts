@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Grid, Stack } from '@mui/material';
+import { Col, Row, Stack } from 'react-bootstrap';
 import FavoriteButton from '../favorite-button';
 import { Contact as IContact } from '../../contact';
 import Actions from './actions';
@@ -10,8 +10,8 @@ import Notes from './notes';
 type Props = IContact;
 
 const Contact = ({ first, last, avatar, favorite, twitter, notes }: Props) => (
-  <Grid id='contact' container spacing={2}>
-    <Grid item>
+  <Row id='contact' container spacing={2}>
+    <Col xs='auto'>
       <img
         key={avatar}
         src={avatar}
@@ -23,17 +23,17 @@ const Contact = ({ first, last, avatar, favorite, twitter, notes }: Props) => (
           objectFit: 'cover',
         }}
       />
-    </Grid>
-    <Grid item>
-      <Stack direction='row' alignItems='center' spacing={1}>
+    </Col>
+    <Col item>
+      <Stack direction='horizontal' gap={1}>
         <Name first={first} last={last} />
         <FavoriteButton favorite={favorite} />
       </Stack>
       <TwitterLink twitter={twitter} />
       <Notes notes={notes} />
       <Actions />
-    </Grid>
-  </Grid>
+    </Col>
+  </Row>
 );
 
 export default Contact;

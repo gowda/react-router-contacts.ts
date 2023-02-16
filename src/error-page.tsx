@@ -1,27 +1,27 @@
-import { Grid, Stack } from '@mui/material';
+import { Row, Col, Stack } from 'react-bootstrap';
 import { useRouteError } from 'react-router-dom';
 
 const ErrorPage = () => {
   const error = useRouteError() as { statusText?: string; message: string };
 
   return (
-    <Grid
+    <Row
       id='error-page'
-      container
-      sx={{ height: '100vh' }}
-      alignItems='center'
-      justifyContent='center'
+      style={{ height: '100vh' }}
+      className='align-items-center justify-content-center'
     >
-      <Stack>
-        <h1 style={{ textAlign: 'center' }}>Oops!</h1>
-        <p style={{ textAlign: 'center' }}>
-          Sorry, an unexpected error has occurred.
-        </p>
-        <p style={{ textAlign: 'center' }}>
-          <i>{error.statusText || error.message}</i>
-        </p>
-      </Stack>
-    </Grid>
+      <Col xs={12}>
+        <Stack>
+          <h1 style={{ textAlign: 'center' }}>Oops!</h1>
+          <p style={{ textAlign: 'center' }}>
+            Sorry, an unexpected error has occurred.
+          </p>
+          <p style={{ textAlign: 'center' }}>
+            <i>{error.statusText || error.message}</i>
+          </p>
+        </Stack>
+      </Col>
+    </Row>
   );
 };
 

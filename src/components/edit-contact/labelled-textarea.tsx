@@ -1,4 +1,4 @@
-import { Grid, TextareaAutosize } from '@mui/material';
+import { Col, Form, Row } from 'react-bootstrap';
 
 interface Props {
   label: string;
@@ -13,21 +13,22 @@ const LabelledTextarea = ({
   placeholder,
   defaultValue,
 }: Props) => (
-  <Grid container marginBottom='1em'>
-    <Grid item xs={12} md={2}>
+  <Row className='mb-2'>
+    <Col xs={12} md={2}>
       <span>{label}</span>
-    </Grid>
-    <Grid item xs={12} md={10}>
-      <TextareaAutosize
+    </Col>
+    <Col item xs={12} md={10}>
+      <Form.Control
+        className='shadow-none rounded-1'
+        as='textarea'
         name={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        minRows={6}
-        maxRows={6}
+        rows={6}
         style={{ width: '100%' }}
       />
-    </Grid>
-  </Grid>
+    </Col>
+  </Row>
 );
 
 export default LabelledTextarea;

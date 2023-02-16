@@ -1,17 +1,16 @@
-import { Grid, Stack } from '@mui/material';
+import { Col, Row, Stack } from 'react-bootstrap';
 import CancelButton from './cancel-button';
 import SaveButton from './save-button';
 
 const Actions = () => (
-  <Grid container>
-    <Grid item xs={0} md={2} />
-    <Grid item xs={12} md={10}>
-      <Stack direction='row' spacing={2}>
+  <Row container>
+    <Col xs={12} md={{ span: 10, offset: 2 }}>
+      <Stack direction='horizontal' gap={2}>
         <SaveButton />
         <CancelButton />
       </Stack>
-    </Grid>
-  </Grid>
+    </Col>
+  </Row>
 );
 
 export default Actions;

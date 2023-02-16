@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Form, useSubmit } from 'react-router-dom';
 import DeleteConfirmationDialog from './delete-confirmation-dialog';
 
@@ -29,7 +29,11 @@ const DeleteButton = () => {
           }
         }}
       >
-        <Button type='submit' color='error' variant='contained'>
+        <Button
+          type='submit'
+          variant='danger'
+          className='shadow-none rounded-1'
+        >
           Delete
         </Button>
       </Form>

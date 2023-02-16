@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
-import { Button } from '@mui/material';
-import {
-  Star as StarIcon,
-  StarOutline as StarOutlineIcon,
-} from '@mui/icons-material';
+import { Button } from 'react-bootstrap';
 import { useFetcher } from 'react-router-dom';
 import { Contact } from '../contact';
 
@@ -28,16 +24,17 @@ const FavoriteButton = ({ favorite: propFavorite }: Props) => {
         name='favorite'
         value={favorite ? 'false' : 'true'}
         aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
-        sx={{
-          boxShadow: 'none',
-          fontSize: '1.5rem',
-          fontWeight: 400,
-          padding: 0,
+        className='shadow-none fw-bold p-0'
+        style={{
           color: favorite ? '#eeb004' : '#a4a4a4',
           minWidth: 'auto',
         }}
       >
-        {favorite ? <StarIcon /> : <StarOutlineIcon />}
+        {favorite ? (
+          <i className='bi bi-star-fill' />
+        ) : (
+          <i className='bi bi-star' />
+        )}
       </Button>
     </Form>
   );

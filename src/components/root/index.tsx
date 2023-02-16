@@ -1,30 +1,27 @@
-import { Grid } from '@mui/material';
+import { Col, Row } from 'react-bootstrap';
 import { Outlet, useNavigation } from 'react-router-dom';
 import Sidebar from './sidebar';
 
 const Root = () => {
   const { state } = useNavigation();
   return (
-    <Grid
-      container
-      direction='row'
-      justifyContent='flex-start'
-      alignItems='stretch'
-      sx={{ height: '100vh' }}
+    <Row
+      className='justify-content-start align-items-center'
+      style={{ height: '100vh' }}
     >
-      <Grid item xs={12} md={3}>
+      <Col xs={12} md={3} className='h-100'>
         <Sidebar />
-      </Grid>
-      <Grid
+      </Col>
+      <Col
         id='detail'
-        className={state === 'loading' ? 'loading' : ''}
-        item
-        flexGrow={1}
-        sx={{ padding: '2rem 4rem' }}
+        xs={12}
+        md={9}
+        className={`h-100 ${state === 'loading' ? 'loading' : ''}`}
+        style={{ padding: '2rem 4rem' }}
       >
         <Outlet />
-      </Grid>
-    </Grid>
+      </Col>
+    </Row>
   );
 };
 

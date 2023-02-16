@@ -1,11 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
+import { Button, Modal } from 'react-bootstrap';
 
 interface Props {
   open: boolean;
@@ -14,27 +7,36 @@ interface Props {
 }
 
 const DeleteConfirmationDialog = ({ open, onConfirm, onClose }: Props) => (
-  <Dialog
-    open={open}
-    onClose={onClose}
+  <Modal
+    show={open}
+    onHide={onClose}
     aria-labelledby='alert-dialog-title'
     aria-describedby='alert-dialog-description'
   >
-    <DialogTitle id='alert-dialog-title'>Delete contact?</DialogTitle>
-    <DialogContent>
-      <DialogContentText id='alert-dialog-description'>
-        Please confirm you want to delete this record.
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onConfirm} color='error'>
+    <Modal.Header className='pb-0 border-bottom-0'>
+      <Modal.Title id='alert-dialog-title'>Delete contact?</Modal.Title>
+    </Modal.Header>
+    <Modal.Body className='py-1'>
+      Please confirm you want to delete this record.
+    </Modal.Body>
+    <Modal.Footer className='border-top-0'>
+      <Button
+        variant='danger'
+        className='shadow-none rounded-1'
+        onClick={onConfirm}
+      >
         Delete
       </Button>
-      <Button onClick={onClose} autoFocus>
+      <Button
+        variant='link'
+        className='text-decoration-none'
+        onClick={onClose}
+        autoFocus
+      >
         Cancel
       </Button>
-    </DialogActions>
-  </Dialog>
+    </Modal.Footer>
+  </Modal>
 );
 
 export default DeleteConfirmationDialog;
