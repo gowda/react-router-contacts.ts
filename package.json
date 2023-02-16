@@ -1,5 +1,6 @@
 {
-  "name": "react-router-contacts.ts",
+  "name": "soho",
+  "description": "Cloudformation studio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,12 +17,17 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.5",
     "axios": "^1.2.3",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
+    "d3": "^7.8.2",
     "localforage": "^1.10.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.48.2",

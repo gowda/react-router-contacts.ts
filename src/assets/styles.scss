@@ -1,0 +1,110 @@
+@import '~bootstrap/scss/bootstrap';
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import '~bootstrap/scss/functions';
+
+// 2. Include any default variable overrides here
+$bd-violet: rgb(111, 44, 244);
+$component-active-bg: rgb(111, 44, 244);
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import '~bootstrap/scss/variables';
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/root';
+
+// 6. Optionally include any other parts as needed
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/containers';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/helpers';
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import '~bootstrap/scss/utilities/api';
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-outline-ganesha-primary {
+  @include button-outline-variant($bd-violet);
+}
+
+.btn-outline-ganesha-primary:hover {
+  transform: scale(1.005);
+  --#{$prefix}btn-hover-color: #{$bd-violet};
+  --#{$prefix}btn-hover-bg: var(--bs-white);
+  // FIXME: use bootstrap mixin
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+}
+
+.text-ganesha-primary {
+  color: lighten($bd-violet, 20%);
+}
+
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+.elevated {
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
+.elevated-2 {
+  filter: drop-shadow(5px 1px 5px rgb(0 0 0 / 0.4));
+}
+
+.hover-zoom:hover {
+  transform: translate(-2px, 2px) scale(1.2);
+  // https://css-tricks.com/adding-shadows-to-svg-icons-with-css-and-svg-filters/
+  filter: drop-shadow(2px 1px 2px rgb(0 0 0 / 0.4));
+}
+
+.sidebar {
+  .item {
+    z-index: 100;
+    background-color: white;
+    &:last-child {
+      border-bottom: none !important;
+    }
+
+    .details {
+      visibility: hidden;
+      opacity: 0;
+      height: 0;
+      transition: visibility 0s linear 1s, height 1s linear, opacity 1s linear;
+      z-index: -1;
+    }
+  }
+}
+
+.modal.trade-form {
+  .modal-dialog {
+    position: fixed;
+    top: auto;
+    right: 0%;
+    left: 0%;
+    bottom: 0;
+    margin-bottom: 0 !important;
+  }
+
+  .form-switch > .form-check-input {
+    background-color: lighten(#0c6dfd, 25%);
+    border-color: darken(#0c6dfd, 5%);
+    background-image: escape-svg($form-switch-checked-bg-image);
+  }
+
+  .form-switch > .form-check-input:checked {
+    background-color: lighten(#dc3444, 25%);
+    border-color: darken(#dc3444, 5%);
+  }
+}
